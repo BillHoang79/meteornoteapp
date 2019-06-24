@@ -10,7 +10,6 @@ import "./main.html";
 import { Meteor } from "meteor/meteor";
 
 Template.body.helpers({
-  /*notes: [{ text: "My Note 1" }, { text: "My Note 2" }, { text: "My Note 3" }]*/
   notes() {
     return Notes.find({});
   }
@@ -23,14 +22,6 @@ Template.add.events({
     const target = event.target;
     const text = target.text.value;
 
-    /*
-    Notes.insert({
-      text,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username
-    });
-    */
     Meteor.call("notes.insert", text);
 
     target.text.value = " ";
@@ -43,7 +34,6 @@ Template.add.events({
 
 Template.note.events({
   "click .delete-note": function() {
-    //Notes.remove(this._id);
     Meteor.call("notes.remove", this);
     return false;
   }
